@@ -8,6 +8,7 @@ date: //p[@class='news_datum']
 author: //article//span[@itemprop="author"]
 author: //span[@class='author']
 author: //div[@class="article__author"]
+author: //meta[@name='author']/@content
 
 # print version (if single_page_link is followed)
 body: //article[contains(@class, 'printversion')]
