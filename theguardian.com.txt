@@ -1,10 +1,10 @@
-body: //article
-body: //div[contains(concat(' ',normalize-space(@class),' '),' content__main ')]//div[contains(concat(' ',normalize-space(@class),' '),' gs-container ')]
+body: //figure[.//picture[@itemProp="contentUrl"]] | //div[contains(@class, 'article-body')]
+
 strip: //article//div[contains(@class, 'content__secondary-column')]
-strip: //article//aside
+strip: //aside
 strip: //article//div[contains(@class, 'block-share')]
-strip: //article//div[@class='submeta']
-strip: //article//span[contains(@class, 'inline-expand-image')]
+strip: //div[@class='submeta']
+strip: //span[contains(@class, 'inline-expand-image')]
 strip: //article//div[@class='kindleWidget']
 strip: //article//div[@class='email-subscription']
 strip: //article//script
@@ -16,8 +16,27 @@ strip: //div[@class='content__main-column']
 strip: //div[contains(@class, 'content-footer')]
 strip: //footer
 strip: //form
+strip: //div[starts-with(@id, "qanda-")]
+strip: //button
+strip: //div[contains(@class, 'ad-slot-container')]
 
+strip: //figure[contains(@data-spacefinder-type, "NewsletterSignup")]
 strip: //figure[@data-atom-type="qanda" or @data-atom-type="profile"]
+
+# [wallabag] can't diplay the typographic quotation marks, this replaces them:
+find_string: ‘
+replace_string: '
+find_string: ’
+replace_string: '
+find_string: “
+replace_string: "
+find_string: ”
+replace_string: "
+
+#2021
+strip_id_or_class: sign-in-gate
+strip_id_or_class: js-ad-slot
+strip: //div[@data-print-layout="hide"]
 
 strip_id_or_class: hide-on-mobile
 strip_id_or_class: reveal-caption
@@ -25,9 +44,13 @@ strip_id_or_class: readerquestions
 strip_id_or_class: submeta
 strip_id_or_class: site-message
 strip_id_or_class: contributions__epic
+strip_id_or_class: youtube-media-atom__overlay
 
 strip: //figcaption
-
+strip: //svg
+strip: //gu-island/parent::figure
+strip: //gu-island
+strip: //figure//button
 
 title: //h1[@articleprop='headline']
 author: //a[@rel='author']

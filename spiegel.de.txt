@@ -1,3 +1,5 @@
+http_header(user-agent): Mozilla/5.0 (Macintosh; Intel Mac OS X 14.7; rv:140.0) Gecko/20100101 Firefox/140.0
+
 # July 2020 redesign
 
 tidy: no
@@ -8,6 +10,28 @@ author: //meta[@name="author"]/@content
 date: //meta[@name="date"]/@content
 body: //article[@data-area="article"]//header//div[contains(@class, 'leading-loose')] | //div[@data-article-el="body"]
 
+# Remove subscription advertiser
+strip: //div[@data-area='paywall']
+
+# Remove video with lots of inner tags
+strip_id_or_class: jwplayer
+strip: //div[@data-component="JWPlayer"]
+
+# Remove lazy-loaded imags (old method)
+#replace_string(<noscript>): <!-- noscript -->
+#replace_string(</noscript>): <!-- /noscript -->
+#strip: //img[contains(concat(" ", normalize-space(@class), " "), " lazyload ")]
+
+# New method
+replace_string(src="data): data-src-disabled="data
+replace_string(data-src="): src="
+strip: //picture/following-sibling::noscript[1]
+
+strip_id_or_class: pointer-events-none
+strip_id_or_class: border-separator-b
+strip_id_or_class: feature-bar
+strip: //button
+strip: //svg
 strip: //*[@data-app-hidden="true"]
 #strip: //*[@data-advertisement]
 strip: //aside

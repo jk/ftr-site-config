@@ -1,3 +1,4 @@
+body: //article/div[contains(concat(' ',normalize-space(@class),' '),' entry ')]
 body: //div[@class='entry-inner']
 
 # Remove lazy-loaded image tags, favouring image in <noscript> elements
@@ -7,6 +8,14 @@ strip: //img[contains(concat(" ", normalize-space(@class), " "), " jetpack-lazy-
 
 strip: //div[@class='aawp']
 strip_id_or_class: aawp-disclaimer
+strip_id_or_class: su-posts
+strip_id_or_class: wp-embedded-content
+
+# remove google preferences box
+strip: //a[contains(@href, 'google.com/preferences/')]
+
+
+prune: no
 
 test_url: https://stadt-bremerhaven.de/google-meet-laesst-sich-nun-auf-alle-cast-faehigen-geraete-streamen/
 test_url: https://stadt-bremerhaven.de/nanoleaf-essentials-a60-mit-thread-im-test/

@@ -1,16 +1,31 @@
-body: //div[contains(@class, 'thecontent')]
+## If article contains an image gallery, use 'wallabagger' to get all images
+## wallabag UI or FullText-RSS can't fetch them, because of JavaScript
 
-strip_image_src: loading.gif
-find_string:src="http://cdn.howtogeek.com/public/images/blank.gif"
-replace_string:-
-find_string:data-href=
-replace_string:src=
+http_header(user-agent): Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0
 
-find_string:src="/pagespeed_static/1.JiBnMqyl6S.gif"
-replace_string:-
-find_string:data-pagespeed-lazy-src=
-replace_string:src=
+body: //main[1]/article[1]/section[@id='article-body'] | //header/div[contains(concat(' ',normalize-space(@class),' '),' heading_image ')]
 
-strip_id_or_class: relatedside
+strip: //button
+strip: //a[contains(@href, 'ref=ad_removal')]
 
-test_url: http://www.howtogeek.com/school/microsoft-excel-formulas-and-functions/lesson1/
+## prior 2024/11
+
+body: //article[1]
+
+strip_id_or_class: heading_breadcrumb
+strip_id_or_class: heading_title
+strip_id_or_class: heading_meta
+strip_id_or_class: heading_sharing
+strip_id_or_class: article-table-contents
+
+strip: //footer/self::* | //footer/following-sibling::*
+
+prune: no
+
+# wallabag needs this for images
+find_string: data-img-url="https:
+replace_string: src="https:
+
+test_url: https://www.howtogeek.com/mac-pro-3d-print-mac-mini-case/
+test_url: https://www.howtogeek.com/how-to-see-who-is-stalking-your-facebook-profile/
+test_url: https://www.howtogeek.com/feed/
